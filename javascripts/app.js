@@ -101,22 +101,36 @@ function moveForward(rover) {
 }
 
 function moveBackward(rover) {
-  if (rover.direction === "N") {
-    pushTravelLog(rover);
-    rover.y += 1;
-    console.log("Rover Coordinate " + rover.y + " , " + rover.x);
-  } else if (rover.direction === "W") {
-    pushTravelLog(rover);
-    rover.x += 1;
-    console.log("Rover Coordinate " + rover.y + " , " + rover.x);
-  } else if (rover.direction === "S") {
-    pushTravelLog(rover);
-    rover.y -= 1;
-    console.log("Rover Coordinate " + rover.y + " , " + rover.x);
-  } else if (rover.direction === "E") {
-    pushTravelLog(rover);
-    rover.x -= 1;
-    console.log("Rover Coordinate " + rover.y + " , " + rover.x);
+  if (rover.direction === "S" && rover.y > 0) {
+    if (map[rover.y - 1][rover.x] === null) {
+      pushTravelLog(rover);
+      rover.y -= 1;
+    } else {
+      console.log("Obstacle as found - nothing happens");
+    }
+  } else if (rover.direction === "E" && rover.x > 0) {
+    if (map[rover.y][rover.x - 1] === null) {
+      pushTravelLog(rover);
+      rover.x -= 1;
+    } else {
+      console.log("Obstacle as found - nothing happens");
+    }
+  } else if (rover.direction === "N" && rover.y < 9) {
+    if (map[rover.y + 1][rover.x] === null) {
+      pushTravelLog(rover);
+      rover.y += 1;
+    } else {
+      console.log("Obstacle as found - nothing happens");
+    }
+  } else if (rover.direction === "W" && rover.x < 9) {
+    if (map[rover.y][rover.x + 1] === null) {
+      pushTravelLog(rover);
+      rover.x += 1;
+    } else {
+      console.log("Obstacle as found - nothing happens");
+    }
+  } else {
+    console.log("Limit Boundaries - nothing happens");
   }
 }
 
@@ -150,4 +164,4 @@ function roverCommands(rover, commands) {
   getTravelLog(rover);
 }
 
-roverCommands(rover, "lffffff");
+roverCommands(rover, "bbbbbbbbbbbbb");
